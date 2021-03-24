@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- 
+ ▄▀▀█▄   ▄▀▀▀▀▄ 
+▐ ▄▀ ▀▄ █ █   ▐ 
+  █▄▄▄█++  ▀▄  
+ ▄▀   █ ▀▄   █  
+█   ▄▀   █▀▀▀   
+▐   ▐    ▐      
+            -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROOM#001 [a++s]</title>
+  <script src="js/aframe-master.js"></script>
+  <script src="js/components/camera-position.js"></script>
+</head>
+
+<body>
+  <script>
+    AFRAME.registerComponent('audiohandler', {
+      init: function () {
+        let playing = false;
+        let audio = document.getElementById("audio1");
+        this.el.addEventListener('click', () => {
+          if (!playing) {
+            audio.play();
+          }
+          playing = !playing;
+        });
+      }
+    })
+  </script>
+
+  <a-scene device-orientation-permission-ui="enabled: false" loading-screen="dotsColor: white; backgroundColor: black"
+    background="color: #fff" inspector="" keyboard-shortcuts="" rotation="0 180 0" screenshot=""
+    vr-mode-ui="enabled: false" device-orientation-permission-ui="" visible="" raycaster="far: 30; objects: .clickable"
+    cursor="rayOrigin: mouse" camera-position audiohandler>
+
+    <a-assets>
+      <a-asset-item id="glb" src="objects/torre1.glb">
+      </a-asset-item>
+      <a-asset-item id="glb2" src="objects/brd.glb">
+      </a-asset-item>
+      <a-asset-item id="glb3" src="objects/room001logo.glb">
+      </a-asset-item>
+      <audio id="audio1" src="audio/ambient.mp3" preload="auto" loop></audio>
+    </a-assets>
+
+    <a-entity id="rig" position="0 0 15" rotation="15 0 0">
+      <a-entity id="camera" camera look-controls wasd-controls="acceleration: 75"></a-entity>
+    </a-entity>
+    <a-entity class="not-clickable" id="glb3" gltf-model="objects/room001logo.glb" position="0 3 -10" rotation="0 0 0"
+      scale="1 1 1" visible="">
+    </a-entity>
+
+    <a-entity class="not-clickable" id="glb" gltf-model="objects/torre1.glb" position="0 10 -60" rotation="0 0 0"
+      scale="1.8 1.8 1.8" visible=""
+      animation="property: rotation; to: 0 360 0; dur: 120000; easing: linear; loop: true;">
+    </a-entity>
+
+    <a-plane position="0 -2 0" rotation="-90 0 0" scale="45 45" segments-height="20" segments-width="20"
+      wireframe="true" width="4" height="4" color="#000000" shadow></a-plane>
+
+    <a-entity position="0 10 -60" animation="property: rotation; to: 0 -360 ; dur: 12000; easing: linear; loop: true">
+      <a-entity id="glb2" class="not-clickable" gltf-model="rooms-objects/brd.glb" position="0 14 -12"
+        rotation="-90 0 0" scale="1 1 1" visible="">
+      </a-entity>
+    </a-entity>
+
+    <a-entity light="angle: 61.19; color: #ff7b00; intensity: 1.5; type: point; castShadow: true; rotation: 0 0 0"
+      animation="property: light.color; to: #ff00f7; dur: 55000; loop: true; dir: alternate" position="0 10 -40">
+    </a-entity>
+    <a-entity light="angle: 61.19; intensity: 0.0; color: #004cff; type: point; castShadow: true; rotation: 0 0 0"
+      animation="property: light.intensity; to: 1.0; dur: 1500; loop: true; dir: alternate" position="5 33 6">
+    </a-entity>
+
+  </a-scene>
+
+</body>
+
+</html>
